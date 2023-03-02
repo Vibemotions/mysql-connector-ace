@@ -1,10 +1,15 @@
-.vscode
-
-*.app
-*.out
-
+# dynamic libraries
 *.so
 *.dll
 
-*.o
+# static libraries
+.a
 
+# executables
+*.exe
+*.out
+*.app
+
+# others
+core
+.vscode
