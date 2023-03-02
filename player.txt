@@ -1,3 +1,5 @@
+Here is the structure & content of sample table snooker.player.
+
 mysql> desc player;
 +-------+-------------+------+-----+---------+-------+
 | Field | Type        | Null | Key | Default | Extra |
