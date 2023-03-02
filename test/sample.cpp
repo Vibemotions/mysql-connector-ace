@@ -87,17 +87,32 @@ int test() {
         */
         driver = get_driver_instance();
 
-        // 1. connect to MySQL server by calling connect method of driver
+        /*
+            1. connect to MySQL server by call connect() method of driver, 
+               which holds 2 overloads as
+               connect(const sql::SQLString& hostName,
+                       const sql::SQLString& userName,
+                       const sql::SQLString& password)
+               and
+               connect(ConnectOptionsMap & options)
+        */
         conn = driver->connect(HOST, USER, PASSWORD);
         conn->setAutoCommit(0);
 
-        // 2. choose the database schema
+        /*
+            2. choose the database schema, narrowly
+               that is to say, the name of database
+        */
         conn->setSchema("snooker");
 
-        // 3. show database metadata via DatabaseMetaData object
+        /*
+            3. show database metadata via DatabaseMetaData object
+        */
         show_dbMetadata(conn);
 
-
+        /*
+            4. execute sql using Statement
+        */
         stmt = conn->createStatement();
         res = stmt->executeQuery(sqlStr);
         while (res->next()) {
@@ -120,18 +135,31 @@ int test() {
         // show_resMetadata(res);
 
 
-        // prestmt = conn->prepareStatement("insert into player values ('Ma Hailong', 18)");
+        /*
+            5. execute sql using PreparedStatement, which extends from Statement
+               class, supporting precompiled sql that allows accepting parameters
+               so it is faster than plain Statement when interacting with server
+        */
         prestmt = conn->prepareStatement("insert into player values (?, ?)");
         prestmt->setString(1, "Ma Hailong");
         prestmt->setInt(2, 18);
         prestmt->executeUpdate();
 
+        /*
+            6. set savepoint via setSavepoint method, which can be used for rollback
+               note that space is forbidden inner the name of savepoint, or it will
+               raise SQLException (MySQL error code: 1064, SQLState: 42000)
+        */
         savept = conn->setSavepoint("savept_1");
 
         prestmt->setString(1, "test Player");
         prestmt->setInt(2, 6);
         prestmt->executeUpdate();
 
+        /*
+            7. rollback to the predefined savepoint savept_1, then the "test Player 6"
+               is invisible in the result set of the sql query below
+        */
         conn->rollback(savept);
         conn->releaseSavepoint(savept);
 
@@ -142,7 +170,6 @@ int test() {
             cout << res->getInt("age") << endl;
         }
         cout << res->rowsCount() << " row(s) in set\n" << endl;
-
 
         delete res;
         delete prestmt;
