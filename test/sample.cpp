@@ -122,19 +122,6 @@ int test() {
         cout << res->rowsCount() << " row(s) in set\n" << endl;
         show_resMetadata(res);
 
-
-        // cout << "\nThis is the query set of prepared statement" << endl;
-        // prestmt = conn->prepareStatement("select * from player where age < 25");
-        // res = NULL;
-        // res = prestmt->executeQuery();
-        // while (res->next()) {
-        //     cout << res->getString("name") << " ";
-        //     cout << res->getInt("age") << endl;
-        // }
-        // cout << res->rowsCount() << " row(s) in set" << endl;
-        // show_resMetadata(res);
-
-
         /*
             5. execute sql using PreparedStatement, which extends from Statement
                class, supporting precompiled sql that allows accepting parameters
