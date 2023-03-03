@@ -75,6 +75,7 @@ static void show_resultset(ResultSet* res) {
     if (res->isClosed()) {
         throw std::runtime_error("Result closed.");
     }
+
     ResultSetMetaData *resmeta = res->getMetaData();
     unsigned int columns = resmeta->getColumnCount();
     while (res->next()) {
