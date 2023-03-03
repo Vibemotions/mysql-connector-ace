@@ -1,5 +1,12 @@
 Here is the structure & content of sample table snooker.player.
 
+In order to run sample.cpp successfully, creating database 'snooker' ahead
+is suggested, or you can import this table into any database else you like.
+
+use command: 
+mysql -u root -p [database].player < dump.txt
+to import this table into your database.
+
 mysql> desc player;
 +-------+-------------+------+-----+---------+-------+
 | Field | Type        | Null | Key | Default | Extra |
@@ -7,7 +14,6 @@ mysql> desc player;
 | name  | varchar(40) | NO   | PRI | NULL    |       |
 | age   | int         | YES  |     | NULL    |       |
 +-------+-------------+------+-----+---------+-------+
-2 rows in set (0.00 sec)
 
 mysql> select * from player;
 +--------------------+------+
@@ -33,5 +39,3 @@ mysql> select * from player;
 | Yan Bingtao        |   23 |
 | Zhao Xintong       |   26 |
 +--------------------+------+
-19 rows in set (0.00 sec)
-
