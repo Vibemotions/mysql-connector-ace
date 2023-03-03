@@ -41,8 +41,7 @@ static void show_dbMetadata(Connection* conn) {
       throw std::runtime_error("Database connection closed.");
     }
 
-    DatabaseMetaData *dbmeta;
-    dbmeta = conn->getMetaData();
+    DatabaseMetaData *dbmeta = conn->getMetaData();
     cout << "database: " << dbmeta->getDatabaseProductName() << " "
                          << dbmeta->getDatabaseProductVersion() << endl;
     cout << "driver: " << dbmeta->getDriverName() << " "
@@ -58,7 +57,6 @@ static void show_resMetadata(ResultSet* res) {
     }
 
     ResultSetMetaData *resmeta = res->getMetaData();
-    resmeta = res->getMetaData();
     cout << "table: " << resmeta->getSchemaName(1) << "."
                       << resmeta->getTableName(1) << endl;
     unsigned int columns = resmeta->getColumnCount();
@@ -72,9 +70,26 @@ static void show_resMetadata(ResultSet* res) {
     cout << endl;
 }
 
+static void show_resultset(ResultSet* res) {
+
+    if (res->isClosed()) {
+        throw std::runtime_error("Result closed.");
+    }
+    ResultSetMetaData *resmeta = res->getMetaData();
+    unsigned int columns = resmeta->getColumnCount();
+    while (res->next()) {
+        for (int i = 1; i <= columns; i++) {
+            cout << res->getString(i) << " ";
+        }
+        cout << endl;
+    }
+    cout << res->rowsCount() << " row(s) in set\n" << endl;
+}
+
 int test() {
 
     try {
+
         Driver *driver;
         Connection *conn;
         Statement *stmt;
@@ -83,51 +98,66 @@ int test() {
         Savepoint *savept;
 
         /*
-            0. instantiate a Driver object
+            0. instantiate a sql::Driver object
         */
         driver = get_driver_instance();
 
         /*
-            1. connect to MySQL server by call connect() method of driver, 
+            1. connect to MySQL server by calling connect() method of driver,
                which holds 2 overloads as
-               connect(const sql::SQLString& hostName,
-                       const sql::SQLString& userName,
-                       const sql::SQLString& password)
+                    connect(const sql::SQLString& hostName,
+                            const sql::SQLString& userName,
+                            const sql::SQLString& password)
                and
-               connect(ConnectOptionsMap & options)
+                    connect(ConnectOptionsMap & options)
+               syntax of url is like "tcp://[hostName[:port]][/schemaName]"
+               then, returns a sql::Connection object
         */
         conn = driver->connect(HOST, USER, PASSWORD);
         conn->setAutoCommit(0);
 
         /*
-            2. choose the database schema, narrowly
-               that is to say, the name of database
+            2. choose the database schema if not being set when connecting
         */
         conn->setSchema("snooker");
 
         /*
-            3. show database metadata via DatabaseMetaData object
+            3. show database metadata via sql::DatabaseMetaData object
         */
         show_dbMetadata(conn);
 
         /*
-            4. execute sql using Statement
+            4. create sql::Statement object, which excludes parameters
+               that is to say, it can only be used to execute static sql
+
+               as for how to execute sql, there are 3 methods being supported
+                    ResultSet * executeQuery(const sql::SQLString& sql)
+               returns a sql::ResultSet object
+
+                    int executeUpdate(const sql::SQLString& sql)
+               returns sum of affected row(s)
+
+                    bool execute(const sql::SQLString& sql)
+               returns true  when executing query
+                       false when executing insert、 delete、 update or SQL DDL
         */
         stmt = conn->createStatement();
+
         res = stmt->executeQuery(sqlStr);
-        while (res->next()) {
-            cout << res->getString("name") << " ";
-            cout << res->getString("age") << endl;
-        }
-        cout << res->rowsCount() << " row(s) in set\n" << endl;
         show_resMetadata(res);
+        show_resultset(res);
 
         /*
-            5. execute sql using PreparedStatement, which extends from Statement
-               class, supporting precompiled sql that allows accepting parameters
-               so it is faster than plain Statement when interacting with server
+            5. sql::PreparedStatement object, which extends from Statement class,
+               compared to sql::Statement, its advantages embody as following:
+               1) reduce SQL compile errors and enhance security(as: SQL injection)
+               2) support precompiled SQL that allow accepting parameters
+               3) based on 2, precompiled SQL would be cached by MySQL server, which
+                  leads to rather faster efficiency for the reason that there is no
+                  need to compile SQL again or generate the execution plans
         */
         prestmt = conn->prepareStatement("insert into player values (?, ?)");
+
         prestmt->setString(1, "Ma Hailong");
         prestmt->setInt(2, 18);
         prestmt->executeUpdate();
@@ -150,13 +180,9 @@ int test() {
         conn->rollback(savept);
         conn->releaseSavepoint(savept);
 
-        prestmt = conn->prepareStatement(sqlStr);
-        res = prestmt->executeQuery();
-        while (res->next()) {
-            cout << res->getString("name") << " ";
-            cout << res->getInt("age") << endl;
-        }
-        cout << res->rowsCount() << " row(s) in set\n" << endl;
+        res = stmt->executeQuery(sqlStr);
+        show_resMetadata(res);
+        show_resultset(res);
 
         delete res;
         delete prestmt;
