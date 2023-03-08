@@ -1,5 +1,4 @@
 #include <iostream>
-#include <mysqlx/xapi.h>
 #include <mysqlx/xdevapi.h>
 
 using std::cout;
