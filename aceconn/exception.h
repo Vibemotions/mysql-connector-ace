@@ -51,19 +51,33 @@ struct InvalidArgumentException : public SQLException
 
 struct InvalidInstanceException : public SQLException
 {
-
+    InvalidInstanceException(const InvalidInstanceException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
+    InvalidInstanceException(const std::string& reason) : SQLException(reason, "", 0) { }
 };
 
 struct NonScrollableException : public SQLException
 {
-
+    NonScrollableException(const NonScrollableException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
+    NonScrollableException(const std::string& reason) : SQLException(reason, "", 0) { }
 };
 
 struct SQLUnsupportedOptionException : public SQLException
 {
-    SQLUnsupportedOptionException() {}
+    SQLUnsupportedOptionException(const SQLUnsupportedOptionException& e, const std::string conn_option) :
+        SQLException(e.what(), e.sql_state, e.errNo),
+        option(conn_option)
+    {}
 
-    ~SQLUnsupportedOptionException() noexcept;
+    SQLUnsupportedOptionException(const std::string& reason, const std::string& conn_option) :
+        SQLException(reason, "", 0),
+        option(conn_option)
+    {}
+
+    const char* getConnectionOption() const {
+        return option.c_str();
+    }
+
+    ~SQLUnsupportedOptionException() noexcept { };
 
 protected:
     const std::string option;
