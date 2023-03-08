@@ -11,16 +11,16 @@ protected:
     const int errNo;
 
 public:
-    SQLException(const SQLException &e) : std::runtime_error(e.what()), sql_state(e.sql_state), errNo(e.errNo) { }
+    SQLException(const SQLException &e) : std::runtime_error(e.what()), sql_state(e.sql_state), errNo(e.errNo) {}
 
     SQLException(const std::string& reason, const std::string& SQLState, int vendorCode) :
-        std::runtime_error(reason), sql_state(SQLState), errNo(vendorCode) { }
+        std::runtime_error(reason), sql_state(SQLState), errNo(vendorCode) {}
 
-    SQLException(const std::string& reason, const std::string& SQLState) : std::runtime_error(reason), sql_state(SQLState), errNo(0) { }
+    SQLException(const std::string& reason, const std::string& SQLState) : std::runtime_error(reason), sql_state(SQLState), errNo(0) {}
 
-    SQLException(const std::string& reason) : std::runtime_error(reason), sql_state("HY000"), errNo(0) { }
+    SQLException(const std::string& reason) : std::runtime_error(reason), sql_state("HY000"), errNo(0) {}
 
-    SQLException() : std::runtime_error(""), sql_state("HY000"), errNo(0) { }
+    SQLException() : std::runtime_error(""), sql_state("HY000"), errNo(0) {}
 
     const std::string & getSQLState() const {
         return sql_state;
@@ -39,26 +39,26 @@ public:
 
 struct MethodNotImplementedException : public SQLException
 {
-    MethodNotImplementedException(const MethodNotImplementedException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
-    MethodNotImplementedException(const std::string& reason) : SQLException(reason, "", 0) { }
+    MethodNotImplementedException(const MethodNotImplementedException& e) : SQLException(e.what(), e.sql_state, e.errNo) {}
+    MethodNotImplementedException(const std::string& reason) : SQLException(reason, "", 0) {}
 };
 
 struct InvalidArgumentException : public SQLException
 {
-    InvalidArgumentException(const InvalidArgumentException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
-    InvalidArgumentException(const std::string& reason) : SQLException(reason, "", 0) { }
+    InvalidArgumentException(const InvalidArgumentException& e) : SQLException(e.what(), e.sql_state, e.errNo) {}
+    InvalidArgumentException(const std::string& reason) : SQLException(reason, "", 0) {}
 };
 
 struct InvalidInstanceException : public SQLException
 {
-    InvalidInstanceException(const InvalidInstanceException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
-    InvalidInstanceException(const std::string& reason) : SQLException(reason, "", 0) { }
+    InvalidInstanceException(const InvalidInstanceException& e) : SQLException(e.what(), e.sql_state, e.errNo) {}
+    InvalidInstanceException(const std::string& reason) : SQLException(reason, "", 0) {}
 };
 
 struct NonScrollableException : public SQLException
 {
-    NonScrollableException(const NonScrollableException& e) : SQLException(e.what(), e.sql_state, e.errNo) { }
-    NonScrollableException(const std::string& reason) : SQLException(reason, "", 0) { }
+    NonScrollableException(const NonScrollableException& e) : SQLException(e.what(), e.sql_state, e.errNo) {}
+    NonScrollableException(const std::string& reason) : SQLException(reason, "", 0) {}
 };
 
 struct SQLUnsupportedOptionException : public SQLException
@@ -77,7 +77,7 @@ struct SQLUnsupportedOptionException : public SQLException
         return option.c_str();
     }
 
-    ~SQLUnsupportedOptionException() noexcept { };
+    ~SQLUnsupportedOptionException() noexcept {};
 
 protected:
     const std::string option;
