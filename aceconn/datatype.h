@@ -2,6 +2,7 @@
 #define _DATATYPE_H_
 
 class DataType {
+
 private:
     DataType();
 
