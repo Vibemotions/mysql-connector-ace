@@ -15,7 +15,7 @@ public:
 
     virtual void close() = 0;
 
-    virtual void execute(const SQLString& sql) = 0;
+    virtual bool execute(const SQLString& sql) = 0;
 
     virtual ResultSet *executeQuery(const SQLString& sql) = 0;
 
