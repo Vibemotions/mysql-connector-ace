@@ -3,8 +3,12 @@
 
 #include <string>
 #include <list>
+
 #include "datatype.h"
 #include "sqlstring.h"
+
+class ResultSet;
+class Connection;
 
 class DatabaseMetaData {
 
@@ -36,6 +40,10 @@ public:
         tableIndexOther,
         tableIndexStatistic
     };
+
+    virtual Connection *getConnection() = 0;
+
+    virtual ResultSet *getSchemas() = 0;
 
     virtual bool allProceduresAreCallable() = 0;
 
