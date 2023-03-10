@@ -178,6 +178,8 @@ public:
 
     virtual void setAutoCommit(bool autoCommit) = 0;
 
+    virtual void setReadOnly(bool readOnly) = 0;
+
     virtual Savepoint *setSavepoint() = 0;
     virtual Savepoint *setSavepoint(const SQLString& name) = 0;
 
