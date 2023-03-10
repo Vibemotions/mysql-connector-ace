@@ -35,6 +35,19 @@ class VariantImpl : public BaseVariantImpl {
 
 public:
     VariantImpl(T i) : BaseVariantImpl(new T(i), typeid(i).name()) {}
+
+    virtual VariantImpl* Clone() {
+        return new VariantImpl(*this);
+    }
+
+private:
+    void destroy_content() {
+
+    }
+
+    void copy_content(BaseVariantImpl& that) {
+
+    }
 };
 
 
@@ -43,6 +56,19 @@ class VariantMap : public BaseVariantImpl {
 
 public:
     VariantMap(T i) : BaseVariantImpl(new T(i), typeid(i).name()) {}
+
+    ~VariantMap() {
+
+    }
+
+private:
+    void destroy_content() {
+
+    }
+
+    void copy_content(VariantMap& var) {
+
+    }
 };
 
 
@@ -51,10 +77,34 @@ class VariantList : public BaseVariantImpl {
 
 public:
     VariantList(T i) : BaseVariantImpl(new T(i), typeid(i).name()) {}
+
+    ~VariantList() {
+
+    }
+
+private:
+    void destroy_content() {
+
+    }
+
+    void copy_content(VariantList& var) {
+
+    }
 };
 
 
 class Variant {
+
+public:
+    Variant(const int &i = 0) :
+        variant(new VariantImpl< int >(i)) {}
+
+    ~Variant() {
+        if (variant) {
+            delete variant;
+            variant = 0;
+        }
+    }
 
 private:
     BaseVariantImpl *variant;
