@@ -4,9 +4,11 @@
 #include <map>
 #include <list>
 #include <iostream>
+
 #include "sqlstring.h"
 #include "resultset_metadata.h"
 
+class Statement;
 class RowID {
 
 public:
@@ -37,6 +39,8 @@ public:
 
     virtual SQLString getString(uint32_t columnIndex) const = 0;
     virtual SQLString getString(const SQLString &columnLabel) const = 0;
+
+    virtual const Statement *getStatement() const = 0;
 
     virtual bool isClosed() const = 0;
 
