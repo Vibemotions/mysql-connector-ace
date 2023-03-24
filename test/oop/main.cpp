@@ -1,5 +1,6 @@
 #include "iostream"
 #include "complex.h"
+#include "string.h"
 
 using namespace std;
 
@@ -10,10 +11,12 @@ void test_complex() {
 }
 
 void test_string() {
-
+    String str1("hello"), str2("world");
+    String str3(str1), str4 = str2; 
+    cout << str3 << " " << str4 << endl;
 }
 
 int main() {
-    test_complex();
+    // test_complex();
     test_string();
 }
