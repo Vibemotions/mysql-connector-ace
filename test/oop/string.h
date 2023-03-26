@@ -12,7 +12,7 @@ public:
     String(const char* cstr = 0);
     // class with pointer member should contains Big Three :
     // 1. copy constructor
-    // 2. copy assignment
+    // 2. copy assignment operator
     // 3. destructor
     String(const String& str);
     String& operator = (const String& str);

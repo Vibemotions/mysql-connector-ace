@@ -1,6 +1,7 @@
 #include "iostream"
 #include "complex.h"
 #include "string.h"
+#include "relation.h"
 
 using namespace std;
 
@@ -16,7 +17,18 @@ void test_string() {
     cout << str3 << " " << str4 << endl;
 }
 
+void test_relation() {
+    
+    {
+        cout << "enter..." << endl;
+        Base base;
+        cout << "exit..." << endl;
+    }
+
+}
+
 int main() {
     // test_complex();
-    test_string();
+    // test_string();
+    test_relation();
 }
