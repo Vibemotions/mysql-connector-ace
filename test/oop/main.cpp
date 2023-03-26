@@ -3,6 +3,7 @@
 #include "string.h"
 #include "account.h"
 #include "relation.h"
+#include "virtual.h"
 
 using namespace std;
 
@@ -43,13 +44,22 @@ void test_static() {
 }
 
 void test_relation() {
+    Base b;
+    Component c;
     Derived d;
+    cout << sizeof(b) << " " << sizeof(c) << " " << sizeof(d) << endl;
+    d.intro();
+}
+
+void test_virtual() {
+    ;
 }
 
 int main() {
     // test_complex();
     // test_string();
     // test_lifetime();
-    test_static();
-    test_relation();
+    // test_static();
+    // test_relation();
+    test_virtual();
 }

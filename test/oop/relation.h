@@ -5,8 +5,6 @@
 
 using namespace std;
 
-class Component;
-
 class Base
 {
 public:
@@ -21,6 +19,21 @@ private:
     ;
 };
 
+class Component {
+public:
+    Component() {
+        cout << "Component ctor..." << endl;
+    }
+    ~Component() {
+        cout << "Component dtor..." << endl;
+    }
+    void intro() { cout << "This is Component..." << endl; }
+    
+    int id;
+private:
+
+};
+
 class Derived : public Base
 {
 public:
@@ -30,21 +43,16 @@ public:
     ~Derived() {
         cout << "Derived dtor..." << endl;
     }
+    void intro() {
+        cout << "calling Component's function...";
+        // Derived 'has-a' Component, then
+        // it can call Component's functions
+        c.intro();
+    }
+    int id;
 
 private:
-};
-
-class Component {
-public:
-    Component() {
-        cout << "Component ctor..." << endl;
-    }
-    ~Component() {
-        cout << "Component dtor..." << endl;
-    }
-
-private:
-    ;
+    Component c;
 };
 
 #endif  // __RELATION__
