@@ -35,13 +35,15 @@ void test_lifetime() {
 void test_static() {
     Account a;
     // 2 ways to call static member function
+    cout << "rate = " << Account::m_rate << endl;
     a.set_rate(5.0);            // 1. object
+    cout << "rate = " << Account::m_rate << endl;
     Account::set_rate(7.0);     // 2. class name
+    cout << "rate = " << Account::m_rate << endl;
 }
 
-
 void test_relation() {
-    ;
+    Derived d;
 }
 
 int main() {

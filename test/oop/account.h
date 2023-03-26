@@ -8,4 +8,7 @@ public:
     static void set_rate(const double x) { m_rate = x; }
 };
 
-#endif
+// static data member MUST be defined
+double Account::m_rate = 8.0;
+
+#endif  // __ACCOUNT__

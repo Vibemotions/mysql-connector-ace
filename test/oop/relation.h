@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class Component;
+
 class Base
 {
 public:
@@ -30,7 +32,6 @@ public:
     }
 
 private:
-    ;
 };
 
 class Component {
