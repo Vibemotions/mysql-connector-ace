@@ -1,6 +1,7 @@
 #include "iostream"
 #include "complex.h"
 #include "string.h"
+#include "account.h"
 #include "relation.h"
 
 using namespace std;
@@ -31,6 +32,14 @@ void test_lifetime() {
     }
 }
 
+void test_static() {
+    Account a;
+    // 2 ways to call static member function
+    a.set_rate(5.0);            // 1. object
+    Account::set_rate(7.0);     // 2. class name
+}
+
+
 void test_relation() {
     ;
 }
@@ -38,6 +47,7 @@ void test_relation() {
 int main() {
     // test_complex();
     // test_string();
-    test_lifetime();
+    // test_lifetime();
+    test_static();
     test_relation();
 }
