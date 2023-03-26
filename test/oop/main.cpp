@@ -17,18 +17,27 @@ void test_string() {
     cout << str3 << " " << str4 << endl;
 }
 
-void test_relation() {
-    
-    {
-        cout << "enter..." << endl;
-        Base base;
-        cout << "exit..." << endl;
-    }
+Complex c3(1, 2);   // 1. global object, can be regarded as static object
+void test_lifetime() {
 
+    {
+        static Complex c2(1, 2);    // 2. static object
+        Complex* p = new Complex;   // 3. heap object
+        // it can cause memory leak without the line below, because
+        // when scope finished, heap object exists still while the
+        // pointer 'p' will be recycled
+        delete p;
+        Complex c1(1, 2);           // 4. stack object, also as auto object
+    }
+}
+
+void test_relation() {
+    ;
 }
 
 int main() {
     // test_complex();
     // test_string();
+    test_lifetime();
     test_relation();
 }
