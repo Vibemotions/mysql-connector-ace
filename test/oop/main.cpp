@@ -3,7 +3,7 @@
 #include "string.h"
 #include "account.h"
 #include "relation.h"
-#include "virtual.h"
+#include "shape.h"
 
 using namespace std;
 
@@ -51,8 +51,8 @@ void test_relation() {
     d.intro();
 }
 
-void test_virtual() {
-    ;
+void test_shape() {
+    // Shape* p = new Square;
 }
 
 int main() {
@@ -61,5 +61,5 @@ int main() {
     // test_lifetime();
     // test_static();
     // test_relation();
-    test_virtual();
+    test_shape();
 }
