@@ -11,35 +11,24 @@ public:
     Shape() {
         cout  << "Shape ctor..." << endl;
     }
-    ~Shape() {
+    virtual ~Shape() {
         cout << "Shape dtor..." << endl;
     }
     virtual void draw() const = 0;
-    virtual void intro();
-    int objectID() const { return id; }
-
-private:
-    int id;
+    virtual void intro() {}
 };
 
 class Square : public Shape
 {
+public:
     Square() {
         cout  << "Square ctor..." << endl;
     }
     ~Square() {
         cout << "Square dtor..." << endl;
     }
-};
-
-class Cycle :public Shape
-{
-    Cycle() {
-        cout  << "Cycle ctor..." << endl;
-    }
-    ~Cycle() {
-        cout << "Cycle dtor..." << endl;
-    }
+    void draw() const {}
+    void intro() {}
 };
 
 #endif  // __SHAPE__

@@ -4,8 +4,13 @@
 #include "account.h"
 #include "relation.h"
 #include "shape.h"
+#include "fraction.h"
 
 using namespace std;
+
+void test_version() {
+    cout << __cplusplus << endl;
+}
 
 void test_complex() {
     Complex c1(1, 2), c2(2, 3);
@@ -52,14 +57,25 @@ void test_relation() {
 }
 
 void test_shape() {
-    // Shape* p = new Square;
+    // dtor of base class MUST be virtual, or it will cause 
+    // memory leak : dtor of derived class cannot be called
+    Shape* p = new Square;
+    delete p;
+}
+
+void test_fraction() {
+    Fraction f(3, 5);
+    double d1 = 7 + f;
+    Fraction d2 = f + 7;
 }
 
 int main() {
+    // test_version();
     // test_complex();
     // test_string();
     // test_lifetime();
     // test_static();
     // test_relation();
-    test_shape();
+    // test_shape();
+    test_fraction();
 }
