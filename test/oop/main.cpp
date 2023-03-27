@@ -69,6 +69,10 @@ void test_fraction() {
     Fraction d2 = f + 7;
 }
 
+void test_vptr() {
+
+}
+
 int main() {
     // test_version();
     // test_complex();
@@ -77,5 +81,6 @@ int main() {
     // test_static();
     // test_relation();
     // test_shape();
-    test_fraction();
+    // test_fraction();
+    test_vptr();
 }
