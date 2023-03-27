@@ -5,6 +5,7 @@
 #include "relation.h"
 #include "shape.h"
 #include "fraction.h"
+#include "vptr.h"
 
 using namespace std;
 
@@ -70,7 +71,10 @@ void test_fraction() {
 }
 
 void test_vptr() {
-
+    A a;
+    B b;
+    C c;
+    cout << sizeof(a) << " " << sizeof(b) << " " << sizeof(c) << endl;
 }
 
 int main() {

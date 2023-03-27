@@ -4,8 +4,8 @@
 class A
 {
 public:
-    virtual void vfunc1();
-    virtual void vfunc2();
+    virtual void vfunc1() {};
+    virtual void vfunc2() {};
     void func1();
     void func2();
 
@@ -16,7 +16,7 @@ private:
 class B : public A
 {
 public:
-    virtual void vfunc1();
+    virtual void vfunc1() {};
     void func2();
 
 private:
@@ -26,7 +26,7 @@ private:
 class C : public B
 {
 public:
-    virtual void vfunc1();
+    virtual void vfunc1() {};
     void func2();
 
 private:
