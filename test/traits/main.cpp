@@ -15,7 +15,9 @@ void test_detection() {
 }
 
 void test_lambda() {
-
+    []{
+        cout << "hello lambda" << endl;
+    }();
 }
 
 int main() {
