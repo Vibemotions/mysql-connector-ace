@@ -22,7 +22,6 @@ void test_lambda() {
     };
     id = 666;
     f();f();f();
-    cout << "id = " << id << endl;
 }
 
 int main() {
