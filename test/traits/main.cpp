@@ -2,6 +2,7 @@
 #include "empty.h"
 #include "../oop/complex.h"
 #include "../oop/string.h"
+#include "mystring.h"
 
 using namespace std;
 
@@ -38,9 +39,14 @@ void test_Rvalue() {
     String() = "lvalue required as left operand of assignment";
 }
 
+void test_move() {
+    ;
+}
+
 int main() {
     // test_empty();
     // test_detection();
     // test_lambda();
-    test_Rvalue();
+    // test_Rvalue();
+    test_move();
 }
