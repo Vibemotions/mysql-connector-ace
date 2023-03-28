@@ -70,6 +70,11 @@ String::~String() {
 #endif  // __STRING__
 
 inline
+String operator + (const String& str1, const String& str2) {
+    return String((string(str1.get_c_str()) + string(str2.get_c_str())).c_str());
+}
+
+inline
 ostream& operator << (ostream& os, const String& str) {
     return os << str.get_c_str();
 }
