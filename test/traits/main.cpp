@@ -15,9 +15,14 @@ void test_detection() {
 }
 
 void test_lambda() {
-    []{
-        cout << "hello lambda" << endl;
-    }();
+    int id = 0;
+    auto f = [&id]() mutable {
+        cout << "id = " << id << endl;
+        ++id;
+    };
+    id = 666;
+    f();f();f();
+    cout << "id = " << id << endl;
 }
 
 int main() {
