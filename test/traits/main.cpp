@@ -10,10 +10,16 @@ void test_empty() {
 }
 
 void test_detection() {
+    decltype(666) id;
+    cout << sizeof(id) << endl;
+}
+
+void test_lambda() {
 
 }
 
 int main() {
     // test_empty();
-    test_detection();
+    // test_detection();
+    test_lambda();
 }
