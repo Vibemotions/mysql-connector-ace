@@ -27,9 +27,9 @@ void test_lambda() {
 }
 
 void test_Rvalue() {
+    int a = 1, b = 2;
     Complex c1(1, 2), c2(2, 3);
     String s1("hello"), s2("world");
-    int a = 1, b = 2;
     // a + b = 3;           error
     c1 + c2 = Complex();
     s1 + s2 = String();
