@@ -75,6 +75,7 @@ void test_vptr() {
     A a;
     B b;
     C c;
+    cout << "size of vptr = " << sizeof(void **) << endl;
     cout << sizeof(a) << " " << sizeof(b) << " " << sizeof(c) << endl;
     
 }
@@ -99,6 +100,6 @@ int main() {
     // test_relation();
     // test_shape();
     // test_fraction();
-    // test_vptr();
+    test_vptr();
     // test_poly();
 }
