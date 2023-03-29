@@ -1,5 +1,7 @@
 #include <iostream>
 #include "empty.h"
+#include <vector>
+#include <algorithm>
 #include "../oop/complex.h"
 #include "../oop/string.h"
 #include "mystring.h"
@@ -25,6 +27,14 @@ void test_lambda() {
     };
     id = 666;
     f();f();f();
+
+    vector<int> vi {};
+    int x = 30, y = 100;
+    //vi.erase(vi.begin(), vi.end(), remove_if());
+    for (auto i : vi) {
+        cout << i << ",";
+    }
+    cout << endl;
 }
 
 void test_Rvalue() {
