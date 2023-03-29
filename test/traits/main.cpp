@@ -28,7 +28,7 @@ void test_lambda() {
     id = 666;
     f();f();f();
 
-    vector<int> vi {5, 28, 50, 83, 70, 590, 245, 59, 24};
+    vector<int, allocator<int>> vi {5, 28, 50, 83, 70, 590, 245, 59, 24};
     int x = 30, y = 100;
     vi.erase(remove_if(vi.begin(), 
                        vi.end(),
