@@ -28,11 +28,14 @@ void test_lambda() {
     id = 666;
     f();f();f();
 
-    vector<int> vi {};
+    vector<int> vi {5, 28, 50, 83, 70, 590, 245, 59, 24};
     int x = 30, y = 100;
-    //vi.erase(vi.begin(), vi.end(), remove_if());
+    vi.erase(remove_if(vi.begin(), 
+                       vi.end(),
+                       [x,y](int n){return n < x || y < n;}),
+            vi.end());
     for (auto i : vi) {
-        cout << i << ",";
+        cout << i << " ";
     }
     cout << endl;
 }
@@ -56,7 +59,7 @@ void test_move() {
 int main() {
     // test_empty();
     // test_detection();
-    // test_lambda();
+    test_lambda();
     // test_Rvalue();
-    test_move();
+    // test_move();
 }
