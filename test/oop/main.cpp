@@ -6,6 +6,7 @@
 #include "shape.h"
 #include "fraction.h"
 #include "vptr.h"
+#include "poly.h"
 
 using namespace std;
 
@@ -75,6 +76,18 @@ void test_vptr() {
     B b;
     C c;
     cout << sizeof(a) << " " << sizeof(b) << " " << sizeof(c) << endl;
+    
+}
+
+void test_poly() {
+using poly::haha;
+using poly::A;
+using poly::B;
+    haha();
+    A* p = new B;
+    // dynamic polymorphism
+    // use base's pointer calling derived's function
+    p->intro();
 }
 
 int main() {
@@ -86,5 +99,6 @@ int main() {
     // test_relation();
     // test_shape();
     // test_fraction();
-    test_vptr();
+    // test_vptr();
+    test_poly();
 }
