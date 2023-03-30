@@ -6,7 +6,6 @@
 #include <stdexcept>
 #include <algorithm>
 
-
 using namespace std;
 
 namespace bb01
