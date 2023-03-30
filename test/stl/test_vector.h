@@ -9,11 +9,11 @@
 
 using namespace std;
 
-namespace bb01
+namespace bb02
 {
 
-void test_array() {
-    cout << "this is array" << endl;
+void test_vector() {
+    cout << "this is vector" << endl;
 }
 
 }
