@@ -33,6 +33,13 @@ void test_vector() {
     cout << "vector.front() = " << c.front() << endl;
     cout << "vector.back() = " << c.back() << endl;
     cout << "vector.data() = " << c.data() << endl;
+
+    timeStart = clock();
+    sort(c.begin(), c.end());
+    cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
+    cout << "vector.front() = " << c.front() << endl;
+    cout << "vector.back() = " << c.back() << endl;
+    c.clear();
 }
 
 }
