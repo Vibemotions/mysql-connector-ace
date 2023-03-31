@@ -100,6 +100,6 @@ int main() {
     // test_relation();
     // test_shape();
     // test_fraction();
-    test_vptr();
+    // test_vptr();
     // test_poly();
 }
