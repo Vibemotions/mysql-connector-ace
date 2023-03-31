@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const long value = 1000000;
+const long VSIZE = 1000000;
 namespace bb02
 {
 
@@ -18,7 +18,7 @@ void test_vector() {
     vector<long> c;
     clock_t timeStart = clock();
 
-    for (long i = 0; i < value; ++i) {
+    for (long i = 0; i < VSIZE; ++i) {
         try {
             c.push_back(rand());
         } catch(exception& e) {
@@ -28,7 +28,7 @@ void test_vector() {
     }
     cout << "milli-seconds : " << clock() - timeStart << endl;
     cout << "vector.max_size() = : " << c.max_size() << endl;
-    cout << "  vector.size()   = : " << c.size() << endl;
+    cout << "vector.size() = : " << c.size() << endl;
     cout << "vector.capacity() = : " << c.capacity() << endl;
     cout << "vector.front() = " << c.front() << endl;
     cout << "vector.back() = " << c.back() << endl;
@@ -38,7 +38,7 @@ void test_vector() {
     sort(c.begin(), c.end());
     cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
     cout << "vector.front() = " << c.front() << endl;
-    cout << "vector.back() = " << c.back() << endl;
+    cout << "vector.back() = " << c.back() << endl << endl;
     c.clear();
 }
 

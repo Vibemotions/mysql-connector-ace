@@ -34,7 +34,7 @@ void test_array() {
     cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
     cout << "array.front() = " << c.front() << endl;
     cout << "array.back() = " << c.back() << endl;
-    cout << "array.data() = " << c.data() << endl;
+    cout << "array.data() = " << c.data() << endl << endl;
 }
 
 }
