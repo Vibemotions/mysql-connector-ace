@@ -77,7 +77,9 @@ void test_vptr() {
     C c;
     cout << "size of vptr = " << sizeof(void **) << endl;
     cout << sizeof(a) << " " << sizeof(b) << " " << sizeof(c) << endl;
-    
+    A& ref = b;
+    cout << "compile : " << typeid(decltype(ref)).name() << endl;
+    cout << "runtime : " << typeid(ref).name() << endl;
 }
 
 void test_poly() {
@@ -100,6 +102,6 @@ int main() {
     // test_relation();
     // test_shape();
     // test_fraction();
-    // test_vptr();
+    test_vptr();
     // test_poly();
 }
