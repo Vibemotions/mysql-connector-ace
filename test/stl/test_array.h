@@ -29,8 +29,8 @@ void test_array() {
     cout << "array.back() = " << c.back() << endl;
 
     timeStart = clock();
-    // sort(c.begin(), c.end());
-    ::qsort(c.data(), ASIZE, sizeof(long), compareLongs);
+    sort(c.begin(), c.end());
+    // ::qsort(c.data(), ASIZE, sizeof(long), compareLongs);
     cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
     cout << "array.front() = " << c.front() << endl;
     cout << "array.back() = " << c.back() << endl;
