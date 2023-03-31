@@ -30,14 +30,14 @@ void test_list() {
     cout << "milli-seconds : " << clock() - timeStart << endl;
     cout << "list.max_size() = : " << c.max_size() << endl;
     cout << "list.size() = : " << c.size() << endl;
-    cout << "vector.front() = " << c.front() << endl;
-    cout << "vector.back() = " << c.back() << endl;
+    cout << "list.front() = " << c.front() << endl;
+    cout << "list.back() = " << c.back() << endl;
 
     timeStart = clock();
     c.sort();
     cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
-    cout << "vector.front() = " << c.front() << endl;
-    cout << "vector.back() = " << c.back() << endl << endl;
+    cout << "list.front() = " << c.front() << endl;
+    cout << "list.back() = " << c.back() << endl << endl;
     c.clear();
 }
 
