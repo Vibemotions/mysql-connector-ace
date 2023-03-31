@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const long ASIZE = 500000L;
+const long ASIZE = 1000000;
 
 int compareLongs(const void* a, const void* b) {
     return (*(long*)a - *(long*)b);
