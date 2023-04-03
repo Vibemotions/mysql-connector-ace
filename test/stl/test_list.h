@@ -9,19 +9,20 @@
 
 using namespace std;
 
-const long LIST_SIZE = 1000000;
-
 namespace bb03
 {
 
+const int LIST_SIZE = 1000000;
+const int RANGE = 100000;
+
 void test_list() {
     cout << "test_list()......" << endl;
-    list<long> c;
+    list<int> c;
     clock_t timeStart = clock();
 
     for (long i = 0; i < LIST_SIZE; ++i) {
         try {
-            c.push_back(rand());
+            c.push_back(rand() % RANGE);
         } catch(exception& e) {
             cout << "i = " << i << " " << e.what() << endl;
             abort();
@@ -34,6 +35,16 @@ void test_list() {
     cout << "list.back() = " << c.back() << endl;
 
     timeStart = clock();
+    auto pItem = ::find(c.begin(), c.end(), target);
+    cout << "calling ::find...\nmilli-seconds : " << clock() - timeStart << endl;
+    if (*pItem == target) {
+        cout << "FOUND " << target << endl;
+    } else {
+        cout << "NOT FOUND" << endl;
+    }
+
+    timeStart = clock();
+    // global method ::sort() is not available for list
     c.sort();
     cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
     cout << "list.front() = " << c.front() << endl;

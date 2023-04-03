@@ -59,7 +59,8 @@ void test_vector() {
     } else {
         cout << "NOT FOUND" << endl;
     }
-
+    
+    cout << endl;
     c.clear();
 }
 
