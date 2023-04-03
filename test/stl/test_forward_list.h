@@ -9,15 +9,15 @@
 
 using namespace std;
 
-const long FSIZE = 1000000;
+const long FORWARD_LIST_SIZE = 1000000;
 namespace bb04
 {
 
 void test_forward_list() {
     cout << "test_forward_list()......" << endl;
-    forward_list<int> c;
+    forward_list<long> c;
     clock_t timeStart = clock();
-    for (long i = 0; i < FSIZE; ++i) {
+    for (long i = 0; i < FORWARD_LIST_SIZE; ++i) {
         try {
             c.push_front(rand());
         } catch (exception& e) {

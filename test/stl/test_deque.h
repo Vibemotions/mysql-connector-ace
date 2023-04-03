@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const long DSIZE = 1000000;
+const long DEQUE_SIZE = 1000000;
 
 namespace bb05
 {
@@ -19,7 +19,7 @@ void test_deque() {
     deque<long> c;
     clock_t timeStart = clock();
 
-    for (long i = 0; i < DSIZE; ++i) {
+    for (long i = 0; i < DEQUE_SIZE; ++i) {
         try {
             c.push_back(rand());
         } catch(exception& e) {

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const long VSIZE = 1000000;
+const long VECTOR_SIZE = 1000000;
 namespace bb02
 {
 
@@ -18,7 +18,7 @@ void test_vector() {
     vector<long> c;
     clock_t timeStart = clock();
 
-    for (long i = 0; i < VSIZE; ++i) {
+    for (long i = 0; i < VECTOR_SIZE; ++i) {
         try {
             c.push_back(rand());
         } catch(exception& e) {

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const long LSIZE = 1000000;
+const long LIST_SIZE = 1000000;
 
 namespace bb03
 {
@@ -19,7 +19,7 @@ void test_list() {
     list<long> c;
     clock_t timeStart = clock();
 
-    for (long i = 0; i < LSIZE; ++i) {
+    for (long i = 0; i < LIST_SIZE; ++i) {
         try {
             c.push_back(rand());
         } catch(exception& e) {
