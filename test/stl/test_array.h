@@ -9,11 +9,11 @@
 #include "common.h"
 
 using namespace std;
+namespace bb01
+{
 
 const int ARRAY_SIZE = 1000000;
 const int RANGE = 100000;
-namespace bb01
-{
 
 void test_array() {
     cout << "test_array()......" << endl;
@@ -29,6 +29,7 @@ void test_array() {
 
     timeStart = clock();
     // sort(c.begin(), c.end());
+    // cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
     ::qsort(c.data(), ARRAY_SIZE, sizeof(int), compareInt);
     cout << "calling ::qsort...\nmilli-seconds : " << clock() - timeStart << endl;
     cout << "array.front() = " << c.front() << endl;
