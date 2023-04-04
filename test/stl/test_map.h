@@ -32,7 +32,7 @@ void test_map() {
     cout << "milli-seconds : " << clock() - timeStart << endl;
     cout << "map.max_size() = : " << c.max_size() << endl;
     cout << "map.size() = : " << c.size() << endl;
-    
+
     timeStart = clock();
     auto it = c.find(target);
     cout << "calling map.find...\nmilli-seconds : " << clock() - timeStart << endl;
