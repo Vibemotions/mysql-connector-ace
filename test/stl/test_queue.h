@@ -33,7 +33,7 @@ void test_queue() {
     cout << "milli-seconds : " << clock() - timeStart << endl;
     cout << "queue.size() = " << c.size() << endl;
     cout << "queue.front() = " << c.front() << endl;
-    cout << "queue.bakc()" << c.back() << endl;
+    cout << "queue.back()" << c.back() << endl;
     c.pop();
     cout << "queue.size() = " << c.size() << endl;
     cout << "queue.front() = " << c.front() << endl;
