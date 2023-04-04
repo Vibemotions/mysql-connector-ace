@@ -42,7 +42,7 @@ void test_forward_list() {
 
     timeStart = clock();
     c.sort();
-    cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
+    cout << "calling forward_list.sort...\nmilli-seconds : " << clock() - timeStart << endl;
     cout << "forward_list.front() = " << c.front() << endl << endl;
     c.clear();
 }

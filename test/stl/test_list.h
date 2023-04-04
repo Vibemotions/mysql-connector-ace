@@ -46,7 +46,7 @@ void test_list() {
     timeStart = clock();
     // global method ::sort() is not available for list
     c.sort();
-    cout << "calling sort...\nmilli-seconds : " << clock() - timeStart << endl;
+    cout << "calling list.sort...\nmilli-seconds : " << clock() - timeStart << endl;
     cout << "list.front() = " << c.front() << endl;
     cout << "list.back() = " << c.back() << endl << endl;
     c.clear();
