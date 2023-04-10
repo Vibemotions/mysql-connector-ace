@@ -5,6 +5,11 @@
 
 using namespace std;
 
+/*
+    How to compile:
+    g++ *.cpp *.cc -o app `pkg-config --cflags --libs protobuf`
+*/
+
 int main() {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -26,7 +31,7 @@ int main() {
     string serializedStr;
     student.SerializeToString(&serializedStr);
     cout << "serialization result: " << serializedStr << endl;
-    cout << "debugString: " << student.DebugString() << endl;
+    cout << "debugString:\n" << student.DebugString() << endl;
 
     // deserialize student object from string
     tutorial::Student deserializedStudent;
@@ -34,7 +39,7 @@ int main() {
         cerr << "Failed to parse student." << endl;
         return -1;
     }
-    cout << "deserializedStudent debugString: " << deserializedStudent.DebugString() << endl;
+    cout << "deserializedStudent debugString:\n" << deserializedStudent.DebugString() << endl;
     cout << "Student ID: " << deserializedStudent.id() << endl;
     cout << "Student Name: " << deserializedStudent.name() << endl;
     if (deserializedStudent.has_email()) {
