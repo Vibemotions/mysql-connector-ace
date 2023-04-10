@@ -7,11 +7,9 @@
 
 class SQLString {
 
-    std::string realStr;
-
 public:
 
-    static const size_t npos = std::string::npos;
+    // static const size_t npos = std::string::npos;
 
     ~SQLString() {}
 
@@ -25,33 +23,42 @@ public:
 
     SQLString(const char* s, size_t n) : realStr(s, n) {}
 
-    const SQLString& operator=(const char* s) {
-        realStr = s;
-        return *this;
-    }
-
-    const SQLString& operator=(const std::string& rhs) {
-        realStr = rhs;
-        return *this;
-    }
-
-    const SQLString& operator=(const SQLString& rhs) {
+    const SQLString& operator=(const SQLString &rhs) {
         realStr = rhs.realStr;
         return *this;
     }
 
-    // Conversion to std::string
-    const std::string& operator&() const {
+    const SQLString& operator=(const std::string &rhs) {
+        realStr = rhs;
+        return *this;
+    }
+
+    const SQLString& operator=(const char* rhs) {
+        realStr = rhs;
+        return *this;
+    }
+
+    const SQLString& operator+=(const SQLString& str) {
+        realStr += str.realStr;
+        return *this;
+    }
+
+    const char& operator[](size_t pos) const { return realStr[pos]; }
+
+    std::string* operator->() { return &realStr; }
+
+    /*
+        convert SQLString to std::string when comes usage below
+        std::string str = SQLString_var;
+    */
+    operator const std::string &() const
+    {
         return realStr;
     }
 
-    // For access std::string methods
-    std::string* operator->() {
-        return &realStr;
-    }
-
     /*
-        In order to use SQLString like std::string, we have a series of func below.
+        in order to use SQLString like std::string, here
+        encapsulate series of funcions of the latter one
     */
 
     int compare(const SQLString& str) const {
@@ -67,14 +74,26 @@ public:
     }
 
     int caseCompare(const SQLString &s) const {
-        // std::string tmp(realStr);
-        // std::string str(s);
-        // std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
-        // std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-        // return tmp.compare(str);
+        std::string tmp(realStr), str(s);
+        std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        return tmp.compare(str);
     }
 
-    // Provide a public method for accessing private member variable realStr
+    int caseCompare(const char* s) const {
+        std::string tmp(realStr), str(s);
+        std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        return tmp.compare(str);
+    }
+
+    int caseCompare(size_t pos, size_t n, const char* s) const {
+        std::string tmp(realStr.c_str() + pos, n), str(s);
+        std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+        return tmp.compare(str);
+    }
+
     const std::string& asStdString() const {
         return realStr;
     }
@@ -92,15 +111,20 @@ public:
         return *this;
     }
 
-    const char& operator[](size_t pos) const {
-        return realStr[pos];
+    SQLString& append(const char* s) {
+        realStr.append(s);
+        return *this;
+    }
+
+    size_t find(const SQLString& s, size_t pos = 0) const {
+        return realStr.find(s.realStr, pos);
     }
 
     size_t find(char c, size_t pos = 0) const {
         return realStr.find(c, pos);
     }
 
-    SQLString substr(size_t pos = 0, size_t n = npos) const {
+    SQLString substr(size_t pos = 0, size_t n = std::string::npos) const {
         return realStr.substr(pos, n);
     }
 
@@ -117,25 +141,27 @@ public:
         return realStr.find_last_of(c, pos);
     }
 
-    const SQLString& operator+=(const SQLString& op2) {
-        realStr += op2.realStr;
-        return *this;
-    }
+private:
+    std::string realStr;
 };
 
 inline const SQLString operator+(const SQLString& op1, const SQLString& op2) {
     return SQLString(op1.asStdString() + op2.asStdString());
 }
 
-inline bool operator==(const SQLString& op1, const SQLString &op2) {
+inline bool operator==(const SQLString& op1, const SQLString& op2) {
     return (op1.asStdString() == op2.asStdString());
 }
 
-inline bool operator!=(const SQLString& op1, const SQLString &op2) {
+inline bool operator!=(const SQLString& op1, const SQLString& op2) {
     return (op1.asStdString() != op2.asStdString());
 }
 
-inline bool operator<(const SQLString& op1, const SQLString &op2) {
+inline bool operator>(const SQLString& op1, const SQLString& op2) {
+    return (op1.asStdString() > op2.asStdString());
+}
+
+inline bool operator<(const SQLString& op1, const SQLString& op2) {
     return (op1.asStdString() < op2.asStdString());
 }
 
