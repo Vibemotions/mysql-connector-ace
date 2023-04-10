@@ -10,17 +10,17 @@ class SQLWarning {
 
 public:
 
-    SQLWarning();
+    SQLWarning() {}
 
-    virtual const SQLString &getMessage() const = 0;
+    virtual const SQLString& getMessage() const = 0;
 
-    virtual const SQLString &getSQLState() const = 0;
+    virtual const SQLString& getSQLState() const = 0;
 
     virtual int getErrorCode() const = 0;
 
-    virtual const SQLWarning *getNextWarning() const = 0;
+    virtual const SQLWarning* getNextWarning() const = 0;
 
-    virtual void setNextWarning(const SQLWarning * _next) = 0;
+    virtual void setNextWarning(const SQLWarning* _next) = 0;
 
 protected:
 
@@ -29,7 +29,7 @@ protected:
     SQLWarning(const SQLWarning&) {};
 
 private:
-    const SQLWarning &operator=(const SQLWarning& rhs);
+    const SQLWarning& operator=(const SQLWarning& rhs);
 };
 
 #endif
