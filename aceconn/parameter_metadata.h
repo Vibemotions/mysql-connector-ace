@@ -6,14 +6,14 @@
 class ParameterMetaData {
 
 public:
-    enum {
+    enum class ParameterMode {
         parameterModeIn,
         parameterModeInOut,
         parameterModeOut,
         parameterModeUnknown
     };
 
-    enum {
+    enum class ParameterType {
         parameterNoNulls,
         parameterNullable,
         parameterNullableUnknown
@@ -21,13 +21,13 @@ public:
 
     virtual SQLString getParameterClassName(unsigned int param) = 0;
 
-    virtual int getParameterCount() = 0;
-
     virtual int getParameterMode(unsigned int param) = 0;
 
     virtual int getParameterType(unsigned int param) = 0;
 
     virtual SQLString getParameterTypeName(unsigned int param) = 0;
+
+    virtual int getParameterCount() = 0;
 
     virtual int getPrecision(unsigned int param) = 0;
 
