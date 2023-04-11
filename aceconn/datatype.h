@@ -3,9 +3,6 @@
 
 class DataType {
 
-private:
-    DataType();
-
 public:
     enum {
         UNKNOWN = 0,
@@ -35,6 +32,9 @@ public:
         SQLNULL,
         JSON
     };
+
+private:
+    DataType();
 };
 
 #endif
