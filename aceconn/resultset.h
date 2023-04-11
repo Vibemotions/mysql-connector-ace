@@ -25,6 +25,12 @@ public:
         FETCH_UNKNOWN
     };
 
+    enum class ResultSetType {
+        FORWARD_ONLY,
+        SCROLL_SENSITIVE,
+        SCROLL_INSENSITIVE
+    };
+
     virtual ~ResultSet() {}
 
     virtual void close() = 0;
