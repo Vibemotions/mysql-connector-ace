@@ -5,11 +5,17 @@
 #include <string>
 #include <memory>
 
-class SQLException : public std::runtime_error {
+#define MEMORY_ALLOC_OPERATORS(Class) \
+    void *operator new(size_t size) { return ::operator new(size); } \
+    void *operator new(size_t, void*) noexcept; \
+    void *operator new(size_t, const std::nothrow_t&) noexcept; \
+    void *operator new[](size_t); \
+    void *operator new[](size_t, void*) noexcept; \
+    void *operator new[](size_t, const std::nothrow_t&) noexcept; \
+    void* operator new(size_t N, std::allocator<Class>&) ;
 
-protected:
-    const std::string sql_state;
-    const int errNo;
+
+class SQLException : public std::runtime_error {
 
 public:
     SQLException(const SQLException& e) : std::runtime_error(e.what()), sql_state(e.sql_state), errNo(e.errNo) {}
@@ -30,7 +36,7 @@ public:
 
     SQLException() : std::runtime_error(""), sql_state("HY000"), errNo(0) {}
 
-    const std::string & getSQLState() const {
+    const std::string& getSQLState() const {
         return sql_state;
     }
 
@@ -43,6 +49,11 @@ public:
     }
 
     virtual ~SQLException() noexcept {};
+
+protected:
+    const std::string sql_state;
+    const int errNo;
+    MEMORY_ALLOC_OPERATORS(SQLException);
 };
 
 struct MethodNotImplementedException : public SQLException
