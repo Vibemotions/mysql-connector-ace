@@ -10,9 +10,10 @@ class ResultSetMetaData;
 class ParameterMetaData;
 
 class PreparedStatement : public Statement {
-
 public:
     virtual ~PreparedStatement() {}
+
+    virtual ParameterMetaData *getParameterMetaData() = 0;
 
     virtual void clearParameters() = 0;
 
@@ -25,11 +26,12 @@ public:
     virtual int executeUpdate(const SQLString& sql) = 0;
     virtual int executeUpdate() = 0;
 
-    virtual ParameterMetaData *getParameterMetaData() = 0;
-
     virtual void setInt(unsigned int parameterIndex, int32_t value) = 0;
-
+    virtual void setDouble(unsigned int parameterIndex, double value) = 0;
+    virtual void setBoolean(unsigned int parameterIndex, bool value) = 0;
     virtual void setString(unsigned int parameterIndex, SQLString& value) = 0;
+
+    virtual PreparedStatement *setResultSetType(ResultSet::ResultSetType type) = 0;
 };
 
 #endif
