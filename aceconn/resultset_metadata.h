@@ -13,23 +13,31 @@ public:
         columnNullableUnknown
     };
 
-    virtual unsigned int getColumnCount() = 0;
-
-    virtual SQLString getCatalogName(unsigned int column) = 0;
-
-    virtual SQLString getColumnLabel(unsigned int column) = 0;
-
-    virtual SQLString getColumnName(unsigned int column) = 0;
-
-    virtual int getColumnType(unsigned int column) = 0;
-
-    virtual SQLString getColumnTypeName(unsigned int column) = 0;
-
     virtual SQLString getSchemaName(unsigned int column) = 0;
 
     virtual SQLString getTableName(unsigned int column) = 0;
 
+    virtual SQLString getCatalogName(unsigned int column) = 0;
+
+    virtual SQLString getColumnName(unsigned int column) = 0;
+
+    virtual SQLString getColumnLabel(unsigned int column) = 0;
+
+    virtual SQLString getColumnTypeName(unsigned int column) = 0;
+
+    virtual SQLString getColumnCharset(unsigned int column) = 0;
+
+    virtual int getColumnType(unsigned int column) = 0;
+
+    virtual unsigned int getColumnCount() = 0;
+
+    virtual unsigned int getPrecision(unsigned int column) = 0;
+
+    virtual unsigned int getScale(unsigned int column) = 0;
+
     virtual bool isAutoIncrement(unsigned int column) = 0;
+
+    virtual bool isCaseSensitive(unsigned int column) = 0;
 
     virtual bool isNullable(unsigned int column) = 0;
 
