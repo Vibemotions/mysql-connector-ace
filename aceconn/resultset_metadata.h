@@ -17,10 +17,8 @@ public:
 
     virtual SQLString getTableName(unsigned int column) = 0;
 
-    virtual SQLString getCatalogName(unsigned int column) = 0;
-
     virtual SQLString getColumnName(unsigned int column) = 0;
-
+    
     virtual SQLString getColumnLabel(unsigned int column) = 0;
 
     virtual SQLString getColumnTypeName(unsigned int column) = 0;
