@@ -63,6 +63,55 @@ public:
 
     virtual ~MySQL_ResultSet();
 
+    void close();
+
+    void cancelRowUpdates();
+
+    void clearWarnings();
+
+    ResultSetMetaData* getMetadata() const;
+
+    void getWarnings();
+
+    size_t getRow() const;
+
+    SQLString getCursorName();
+
+    void setFetchSize(size_t rows);
+
+    uint32_t findColumn(const SQLString& columnLabel) const;
+
+    int32_t getInt(uint32_t columnIndex) const;
+    int32_t getInt(const SQLString& columnLabel) const;
+
+    long double getDouble(uint32_t columnIndex) const;
+    long double getDouble(const SQLString &columnLabel) const;
+
+    bool getBoolen(uint32_t columnIndex) const;
+    bool getBoolen(const SQLString &columnLabel) const;
+
+    SQLString getString(uint32_t columnIndex) const;
+    SQLString getString(const SQLString &columnLabel) const;
+
+    RowID* getRowId(uint32_t columnIndex) const;
+    RowID* getRowId(const SQLString &columnLabel) const;
+
+    bool isNull(uint32_t columnIndex) const;
+    bool isNull(const SQLString &columnLabel) const;
+
+    bool isClosed() const;
+
+    bool isFirst() const;
+
+    bool isLast() const;
+
+    bool rowDeleted();
+
+    bool rowInserted();
+
+    bool rowUpdated();
+
+    size_t rowsCount() const;
 
 private:
     MySQL_ResultSet(const MySQL_ResultSet&);
