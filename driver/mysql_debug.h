@@ -41,6 +41,18 @@ private:
 
 class MySQL_DebugEnterEvent {
 
+public:
+    unsigned int line;
+    const char* const file;
+    const char* const func;
+    const ACE_Refcounted_Auto_Ptr<MySQL_DebugLogger, ACE_Lock> logger;
+
+    MySQL_DebugEnterEvent(unsigned int line,
+                          const char* const file,
+                          const char* const func,
+                          ACE_Refcounted_Auto_Ptr<MySQL_DebugLogger, ACE_Lock>& logger);
+    ~MySQL_DebugEnterEvent();
+
 };
 
 #endif  // _MYSQL_DEBUG_H_
