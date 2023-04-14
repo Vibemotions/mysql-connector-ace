@@ -45,7 +45,7 @@ private:
 
 };
 
-const SQLString& errToSqlState(int32_t errCode, SQLString& state);
+const SQLString& err_to_SqlState(int32_t errCode, SQLString& state);
 
 MySQL_Warning* loadMysqlWarnings(Connection* connection,
                                  unsigned int warningsCount = 0);
