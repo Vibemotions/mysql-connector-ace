@@ -16,6 +16,9 @@ struct MYSQL_FIELD {
     void* extension;
 };
 
+/*
+    column types for MySQL
+*/
 enum class FIELD_TYPE {
     MYSQL_TYPE_DECIMAL,
     MYSQL_TYPE_TINY,
