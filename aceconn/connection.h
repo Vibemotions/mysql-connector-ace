@@ -95,24 +95,23 @@
     "OPT_AUTHENTICATION_KERBEROS_CLIENT_MODE"
 
 
-typedef Variant ConnectPropertyVal;
-
-typedef std::map<SQLString, ConnectPropertyVal> ConnectOptionsMap;
+using ConnectPropertyVal = Variant;
+using ConnectOptionsMap = std::map<SQLString, ConnectPropertyVal>;
 
 class DatabaseMetaData;
 class PreparedStatement;
 class Statement;
 class Driver;
 
-typedef enum transaction_isolation {
+enum class TRANSACTION_ISOLATION {
     TRANSACTION_NONE = 0,
     TRANSACTION_READ_COMMITTED,
     TRANSACTION_READ_UNCOMMITTED,
     TRANSACTION_REPEATABLE_ZERO,
     TRANSACTION_SERIALIZABLE
-} enum_transaction_isolation;
+};
 
-enum ssl_mode {
+enum class SSL_MODE {
     SSL_MODE_DISABLED = 1,
     SSL_MODE_PREFERRED,
     SSL_MODE_REQUIRED,
@@ -194,7 +193,7 @@ public:
 
     virtual Savepoint *setSavepoint(const SQLString& name) = 0;
 
-    virtual void setTransactionIsolation(enum_transaction_isolation level) = 0;
+    virtual void setTransactionIsolation(TRANSACTION_ISOLATION level) = 0;
 };
 
 #endif
