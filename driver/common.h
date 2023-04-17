@@ -60,8 +60,10 @@ typedef int my_socket;
 
 struct NET {
     MYSQL_VIO vio;
-    unsigned char *buff, *buff_end, *write_pos, *read_pos;
-    my_socket fd; /* For Perl DBI/dbd */
+    unsigned char* buff;
+    unsigned char* buff_end;
+    unsigned char* write_pos;
+    unsigned char* read_pos;
     /**
         Set if we are doing several queries in one
         command ( as in LOAD TABLE ... FROM MASTER ),
@@ -90,19 +92,19 @@ struct NET {
         The mysqld server process uses this pointer internally,
         to maintain the server internal instrumentation for the connection.
     */
-    void *extension;
+    void* extension;
 };
 
 struct MYSQL_BIND {
     unsigned long *length; /* output length pointer */
-    bool *is_null;         /* Pointer to null indicator */
-    void *buffer;          /* buffer to get/put data */
+    bool* is_null;         /* Pointer to null indicator */
+    void* buffer;          /* buffer to get/put data */
     /* set this if you want to track data truncations happened during fetch */
-    bool *error;
+    bool* error;
     unsigned char *row_ptr; /* for the current data position */
-    void (*store_param_func)(NET *net, struct MYSQL_BIND *param);
-    void (*fetch_result)(struct MYSQL_BIND *, MYSQL_FIELD *, unsigned char **row);
-    void (*skip_result)(struct MYSQL_BIND *, MYSQL_FIELD *, unsigned char **row);
+    void (*store_param_func)(NET* net, struct MYSQL_BIND* param);
+    void (*fetch_result)(struct MYSQL_BIND*, MYSQL_FIELD*, unsigned char** row);
+    void (*skip_result)(struct MYSQL_BIND*, MYSQL_FIELD*, unsigned char** row);
     /* output buffer length, must be set when fetching str/binary */
     unsigned long buffer_length;
     unsigned long offset;              /* offset position for char/binary fetch */
@@ -115,5 +117,5 @@ struct MYSQL_BIND {
     bool is_unsigned;                  /* set if integer type is unsigned */
     bool long_data_used;               /* If used with mysql_send_long_data */
     bool is_null_value;                /* Used if is_null is 0 */
-    void *extension;
+    void* extension;
 };
