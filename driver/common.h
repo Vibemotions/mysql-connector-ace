@@ -119,3 +119,11 @@ struct MYSQL_BIND {
     bool is_null_value;                /* Used if is_null is 0 */
     void* extension;
 };
+
+enum class PROTOCOL_TYPE {
+    PROTOCOL_TCP,
+    PROTOCOL_SOCKET,
+    PROTOCOL_PIPE,
+    // total num of supported protocol
+    PROTOCOL_COUNT
+};
