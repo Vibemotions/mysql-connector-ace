@@ -26,8 +26,8 @@ class MySQL_ResultSet : public ResultSet {
         1 : the first row
         num_rows + 1 : after the last row
     */
-
-   typedef std::map<SQLString, unsigned int> FieldNameIndexMap;
+   
+   using FieldNameIndexMap = std::map<SQLString, unsigned int>;
    FieldNameIndexMap field_name_to_index_map;
 
    mutable bool was_null;

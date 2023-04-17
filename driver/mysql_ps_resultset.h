@@ -13,7 +13,7 @@ class MySQL_ResultBind;
 
 class StatementWrapper;
 
-typedef std::map<SQLString, unsigned int> FieldNameIndexMap;
+using FieldNameIndexMap = std::map<SQLString, unsigned int>;
 class MySQL_Prepared_ResultSet : public ResultSet {
 
     ACE_Refcounted_Auto_Ptr<StatementWrapper, ACE_Lock> proxy;
