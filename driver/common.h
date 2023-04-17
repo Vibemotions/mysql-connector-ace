@@ -1,4 +1,5 @@
-typedef char** MYSQL_ROW;
+using MYSQL_ROW = char**;
+
 struct MYSQL_FIELD {
     char* name;
     char* table;
@@ -54,7 +55,7 @@ enum class FIELD_TYPE {
 
 struct Vio;
 #define MYSQL_VIO Vio*
-typedef int my_socket;
+using my_socket = int;
 #define MYSQL_ERRMSG_SIZE 512
 #define SQLSTATE_LENGTH 5
 
