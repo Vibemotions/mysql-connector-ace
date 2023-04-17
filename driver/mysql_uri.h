@@ -13,25 +13,52 @@ class MySQL_Uri {
 
 private:
     Host_List host_list;
+
     SQLString schema;
     uint16_t default_port;
 
 public:
     struct Host_Data {
-        Host_Data(SQLString name, uint16_t port, bool has_port = false) : 
-            name(name),
-            port(port),
-            has_port(has_port),
-            protocol(PROTOCOL_TYPE::PROTOCOL_TCP)
+    
+    private:
+        SQLString _name;
+        uint16_t _port;
+        bool _has_port;
+        PROTOCOL_TYPE _protocol;
+
+    public:
+        Host_Data(SQLString name, unsigned int port, bool has_port = false) : 
+            _name(name),
+            _port(port),
+            _has_port(has_port),
+            _protocol(PROTOCOL_TYPE::PROTOCOL_TCP)
         {}
 
         Host_Data();
 
-    private:
-        SQLString name;
-        uint16_t port;
-        bool has_port;
-        PROTOCOL_TYPE protocol;
+        const SQLString& host() { return _name; }
+        unsigned int port() { return _port; }
+        bool hasPort() { return _has_port; }
+        PROTOCOL_TYPE protocol() { return _protocol; }
+        void setProtocol(PROTOCOL_TYPE p) { _protocol = p; }
+
+        void setHost(const SQLString& name, uint16_t port) {
+            setProtocol(PROTOCOL_TYPE::PROTOCOL_TCP);
+            _name = name;
+            _port = port;
+            _has_port = true;
+        }
+
+        void setHost(const SQLString& name) {
+            setProtocol(PROTOCOL_TYPE::PROTOCOL_TCP);
+            _name = name;
+        }
+
+        void setPort(uint16_t port) {
+            setProtocol(PROTOCOL_TYPE::PROTOCOL_TCP);
+            _port = port;
+            _has_port = true;
+        }
     };
 
     MySQL_Uri();
@@ -47,8 +74,14 @@ public:
 
     void erase(Host_List::iterator it) { host_list.erase(it); }
 
-    // void addHost(Host_Data host) { host_list.push_back(host); }
-    void setHost(Host_Data host) { ; }
+    void setSchema(const SQLString& sch) { schema = sch; }
+    SQLString getSchema() { return schema; }
+
+    void setDefaultPort(uint16_t port) { default_port = port; }
+    uint16_t getDefaultPort() { return default_port; }
 };
+
+bool tcpProtocol(Host_Data& host_data);
+bool parseUri(const SQLString& str, MySQL_Uri& uri);
 
 #endif
