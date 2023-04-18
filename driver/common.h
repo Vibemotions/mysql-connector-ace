@@ -1,6 +1,10 @@
 using MYSQL_ROW = char**;
-
+using my_socket = int;
 #define SCRAMBLE_LENGTH 20
+struct Vio;
+#define MYSQL_VIO Vio*
+#define MYSQL_ERRMSG_SIZE 512
+#define SQLSTATE_LENGTH 5
 
 enum class MYSQL_STATUS {
     MYSQL_STATUS_READY,
@@ -153,12 +157,6 @@ enum class FIELD_TYPE {
     MYSQL_TYPE_STRING = 254,
     MYSQL_TYPE_GEOMETRY = 255
 };
-
-struct Vio;
-#define MYSQL_VIO Vio*
-using my_socket = int;
-#define MYSQL_ERRMSG_SIZE 512
-#define SQLSTATE_LENGTH 5
 
 struct NET {
     MYSQL_VIO vio;
