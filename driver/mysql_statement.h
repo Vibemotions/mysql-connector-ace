@@ -26,7 +26,7 @@ protected:
     ACE_Auto_Ptr<MySQL_Warning> warnings;
     MySQL_AttrBind attrbind;
     bool isClosed;
-    unsigned int warningsCount;
+    unsigned int warning_count;
 
 public:
     MySQL_Statement(MySQL_Connection* conn,
