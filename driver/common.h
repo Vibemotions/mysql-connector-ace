@@ -1,5 +1,106 @@
 using MYSQL_ROW = char**;
 
+#define SCRAMBLE_LENGTH 20
+
+enum class MYSQL_STATUS {
+    MYSQL_STATUS_READY,
+    MYSQL_STATUS_GET_RESULT,
+    MYSQL_STATUS_USE_RESULT,
+    MYSQL_STATUS_STMT_GET_RESULT
+};
+
+enum class RESULTSET_METADATA {
+    RESULTSET_METADATA_NONE = 0,
+    RESULTSET_METADATA_FULL = 1
+};
+
+struct LIST {
+    LIST *prev, *next;
+    void *data;
+};
+
+struct CHARSET_INFO {
+    unsigned int number;   /* character set number              */
+    unsigned int state;    /* character set state               */
+    const char *csname;    /* character set name                */
+    const char *name;      /* collation name                    */
+    const char *comment;   /* comment                           */
+    const char *dir;       /* character set directory           */
+    unsigned int mbminlen; /* min. length for multibyte strings */
+    unsigned int mbmaxlen; /* max. length for multibyte strings */
+};
+
+struct st_mysql_options {
+    unsigned int connect_timeout, read_timeout, write_timeout;
+    unsigned int port, protocol;
+    unsigned long client_flag;
+    char *host, *user, *password, *unix_socket, *db;
+    struct Init_commands_array *init_commands;
+    char *my_cnf_file, *my_cnf_group, *charset_dir, *charset_name;
+    char *ssl_key;    /* PEM key file */
+    char *ssl_cert;   /* PEM cert file */
+    char *ssl_ca;     /* PEM CA file */
+    char *ssl_capath; /* PEM directory of CA-s? */
+    char *ssl_cipher; /* cipher to use */
+    char *shared_memory_base_name;
+    unsigned long max_allowed_packet;
+    bool compress, named_pipe;
+    /**
+        The local address to bind when connecting to remote server.
+    */
+    char *bind_address;
+    /* 0 - never report, 1 - always report (default) */
+    bool report_data_truncation;
+
+    /* function pointers for local infile support */
+    int (*local_infile_init)(void **, const char *, void *);
+    int (*local_infile_read)(void *, char *, unsigned int);
+    void (*local_infile_end)(void *);
+    int (*local_infile_error)(void *, char *, unsigned int);
+    void *local_infile_userdata;
+    struct st_mysql_options_extention *extension;
+};
+
+struct MYSQL {
+NET net;                     /* Communication parameters */
+    unsigned char *connector_fd; /* ConnectorFd for SSL */
+    char *host, *user, *passwd, *unix_socket, *server_version, *host_info;
+    char *info, *db;
+    struct CHARSET_INFO *charset;
+    MYSQL_FIELD *fields;
+    struct MEM_ROOT *field_alloc;
+    uint64_t affected_rows;
+    uint64_t insert_id;      /* id if insert on table with NEXTNR */
+    uint64_t extra_info;     /* Not used */
+    unsigned long thread_id; /* Id for connection in server */
+    unsigned long packet_length;
+    unsigned int port;
+    unsigned long client_flag, server_capabilities;
+    unsigned int protocol_version;
+    unsigned int field_count;
+    unsigned int server_status;
+    unsigned int server_language;
+    unsigned int warning_count;
+    struct st_mysql_options options;
+    MYSQL_STATUS status;
+    RESULTSET_METADATA resultset_metadata;
+    bool free_me;   /* If free in mysql_close */
+    bool reconnect; /* set to 1 if automatic reconnect */
+
+    /* session-wide random string */
+    char scramble[SCRAMBLE_LENGTH + 1];
+
+    LIST *stmts; /* list of all statements */
+    const struct MYSQL_METHODS *methods;
+    void *thd;
+    /*
+        Points to boolean flag in MYSQL_RES  or MYSQL_STMT. We set this flag
+        from mysql_stmt_close if close had to cancel result set of this object.
+    */
+    bool *unbuffered_fetch_owner;
+    void *extension;
+};
+
 struct MYSQL_FIELD {
     char* name;
     char* table;
