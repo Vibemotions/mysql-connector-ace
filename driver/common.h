@@ -128,3 +128,9 @@ enum class PROTOCOL_TYPE {
     // total num of supported protocol
     PROTOCOL_COUNT
 };
+
+enum class STATEMENT_OPTION {
+    STMT_ATTR_UPDATE_MAX_LENGTH,
+    STMT_ATTR_CURSOR_TYPE,
+    STMT_ATTR_PREFETCH_ROWS
+};
