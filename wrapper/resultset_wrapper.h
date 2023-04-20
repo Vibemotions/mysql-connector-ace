@@ -18,7 +18,7 @@ class ResultSetWrapper {
     MYSQL_RES* res;
 
 public:
-    ResultSetWrapper() = default;
+    ResultSetWrapper() = delete;
     ResultSetWrapper(const ResultSetWrapper&) = delete;
     ResultSetWrapper& operator=(const ResultSetWrapper&) = delete;
 
