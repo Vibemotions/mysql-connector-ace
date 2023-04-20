@@ -14,7 +14,7 @@ class MySQL_DebugLogger;
 
 class ConnectionWrapper;
 
-class MySQL_CAPI;
+class MySQLCAPI;
 
 class MySQL_MetaData : public DatabaseMetaData {
 
