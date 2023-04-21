@@ -264,3 +264,11 @@ enum class CONNECTION_OPTION {
     MYSQL_OPT_LOAD_DATA_LOCAL_DIR,
     MYSQL_OPT_USER_PASSWORD
 };
+
+struct MYSQL_RES {
+
+};
+
+struct MYSQL_STMT {
+
+};
