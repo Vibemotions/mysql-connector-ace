@@ -1,6 +1,7 @@
 #include <chrono>
 #include <iostream>
 #include <driver/common.h>
+#include <mysql/mysql.h>
 
 using namespace std;
 using namespace chrono;
